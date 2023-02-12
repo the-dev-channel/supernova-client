@@ -189,7 +189,7 @@ class Client extends EventEmitter {
             if (localStorage.token) {
                 hiMsg.token = localStorage.token;
             }
-            self.sendArray([hiMsg])
+            self.sendArray([hiMsg]);
         });
     };
 
@@ -198,6 +198,9 @@ class Client extends EventEmitter {
     };
 
     sendArray(arr) {
+        if (globalThis.window) {
+            if (window.location.hostname == 'localhost') console.debug(arr);
+        }
         this.send(JSON.stringify(arr));
     };
 

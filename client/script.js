@@ -1365,10 +1365,18 @@ $(function () {
   }
 
   var wssport = 8443;
+  /*
   if (window.location.hostname === "localhost") {
     var gClient = new Client("ws://localhost:8443");
   } else {
     var gClient = new Client('wss://mppclone.com:8443');
+  }
+  */
+  let protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  if (window.location.hostname !== 'mppclone.com') {
+	  var gClient = new Client(protocol + '//' + window.location.hostname + ':' + wssport);
+  } else {
+	  var gClient = new Client(protocol + '//mppclone.com:8443');
   }
   if (loginInfo) {
     gClient.setLoginInfo(loginInfo);
